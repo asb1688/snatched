@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FF4D8D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Snatched — Beauty Price Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #FF4D8D;
+    --pink-light: #FFE0ED;
+    --pink-pale: #FFF5F9;
+    --pink-dark: #D63676;
+    --text: #1A1A1A;
+    --text-muted: #888;
+    --border: rgba(0,0,0,0.08);
+    --white: #ffffff;
+    --success: #22c55e;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--pink-pale);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    max-width: 480px;
+    padding: 48px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo {
+    width: 56px;
+    height: 56px;
+    background: var(--pink);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .logo svg { width: 28px; height: 28px; fill: white; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .tagline { font-size: 14px; color: var(--text-muted); letter-spacing: 0.02em; }
+  .retailer-badge { display: flex; gap: 8px; margin-top: 4px; }
+  .badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+  }
+  main {
+    width: 100%;
+    max-width: 480px;
+    padding: 0 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--border);
+    animation: fadeUp 0.4s ease both;
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .url-input-wrap { position: relative; display: flex; align-items: center; }
+  .url-input-wrap input {
+    width: 100%;
+    padding: 14px 70px 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--pink-pale);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .url-input-wrap input:focus { border-color: var(--pink); background: white; }
+  .url-input-wrap input::placeholder { color: var(--text-muted); }
+  .paste-btn {
+    position: absolute;
+    right: 10px;
+    background: var(--pink-light);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--pink-dark);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .paste-btn:hover { background: #f9c4d8; }
+  .product-preview {
+    display: none;
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--pink-pale);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--pink-light);
+    gap: 12px;
+    align-items: center;
+  }
+  .product-preview.visible { display: flex; }
+  .product-info { flex: 1; min-width: 0; }
+  .product-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+  .product-retailer { font-size: 11px; color: var(--text-muted); }
+  .product-price { font-size: 18px; font-weight: 600; color: var(--pink); white-space: nowrap; }
+  .email-row { display: flex; gap: 10px; margin-top: 12px; }
+  .email-row input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--pink-pale);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-row input:focus { border-color: var(--pink); background: white; }
+  .email-row input::placeholder { color: var(--text-muted); }
+  .track-btn {
+    padding: 14px 20px;
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .track-btn:hover { background: var(--pink-dark); }
+  .track-btn:active { transform: scale(0.98); }
+  .track-btn:disabled { background: #f4b8ce; cursor: default; }
+  .success-msg {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: #15803d;
+    font-weight: 500;
+  }
+  .success-msg.visible { display: flex; }
+  .success-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+  .tracked-section { display: none; }
+  .tracked-section.visible { display: block; }
+  .tracked-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .tracked-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: var(--pink-pale);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .tracked-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+  .tracked-name { flex: 1; font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tracked-price { font-size: 13px; font-weight: 600; color: var(--pink); }
+  .tracked-retailer { font-size: 11px; color: var(--text-muted); display: block; font-weight: 400; }
+  .how-it-works { display: flex; flex-direction: column; gap: 14px; }
+  .step { display: flex; align-items: flex-start; gap: 14px; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--pink-light); color: var(--pink-dark);
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 14px; color: var(--text); line-height: 1.5; }
+  .step-text strong { font-weight: 600; }
+  footer {
+    width: 100%; max-width: 480px;
+    padding: 0 24px 32px;
+    text-align: center;
+    font-size: 12px; color: var(--text-muted); line-height: 1.8;
+  }
+  footer a { color: var(--pink); text-decoration: none; }
+  .install-banner {
+    display: none;
+    background: var(--pink); color: white;
+    padding: 12px 20px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500;
+    align-items: center; gap: 10px;
+    cursor: pointer; border: none; width: 100%; text-align: left;
+  }
+  .install-banner.visible { display: flex; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+  </div>
+  <h1>Snatched</h1>
+  <p class="tagline">Beauty price tracker</p>
+  <div class="retailer-badge">
+    <span class="badge">Sephora</span>
+    <span class="badge">Ulta</span>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <p class="card-label">Track a product</p>
+    <div class="url-input-wrap">
+      <input type="url" id="urlInput" placeholder="Paste a Sephora or Ulta product URL" autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="paste-btn" onclick="pasteURL()">Paste</button>
+    </div>
+    <div class="product-preview" id="productPreview">
+      <div class="product-info">
+        <div class="product-name" id="productName">—</div>
+        <div class="product-retailer" id="productRetailer">—</div>
+      </div>
+      <div class="product-price" id="productPrice">—</div>
+    </div>
+    <div class="email-row">
+      <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email" />
+      <button class="track-btn" id="trackBtn" onclick="trackProduct()">Track</button>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="success-dot"></div>
+      You're all set! We'll email you when the price drops.
+    </div>
+  </div>
+
+  <div class="card tracked-section" id="trackedSection">
+    <p class="card-label">Tracking</p>
+    <div class="tracked-list" id="trackedList"></div>
+  </div>
+
+  <div class="card">
+    <p class="card-label">How it works</p>
+    <div class="how-it-works">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Paste a product URL</strong> from Sephora or Ulta</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Enter your email</strong> to receive alerts</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>We monitor the price</strong> daily and email you the moment it drops</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Never pay full price for beauty again.<br>
+  <a href="/privacy">Privacy Policy</a> · <a href="/">get-snatched.com</a>
+</footer>
+
+<script>
+const SUPABASE_URL = "https://zehbulrwadwvpbxunrnb.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGJ1bHJ3YWR3dnBieHVucm5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NzM2ODgsImV4cCI6MjA5MjQ0OTY4OH0.NkEMLUEtxUK1oWCmWW2vpU6RHycGvJStBoB0noJno74";
+
+let detectedProduct = null;
+let trackedItems = JSON.parse(localStorage.getItem('snatchedTracked') || '[]');
+
+function getSite(url) {
+  if (url.includes('sephora.com')) return 'Sephora';
+  if (url.includes('ulta.com')) return 'Ulta';
+  return null;
+}
+
+function getProductNameFromURL(url) {
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    const slug = parts[parts.length - 1] || parts[parts.length - 2] || '';
+    return slug.replace(/-/g, ' ').replace(/P\d+$/, '').trim() || 'Product';
+  } catch { return 'Product'; }
+}
+
+async function pasteURL() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('urlInput').value = text;
+    handleURLChange(text);
+  } catch {
+    document.getElementById('urlInput').focus();
+  }
+}
+
+function handleURLChange(url) {
+  const site = getSite(url);
+  if (!site) return;
+  const name = getProductNameFromURL(url);
+  detectedProduct = { url, site, name, price: null };
+  document.getElementById('productName').textContent = name;
+  document.getElementById('productRetailer').textContent = site;
+  document.getElementById('productPrice').textContent = 'Checking…';
+  document.getElementById('productPreview').classList.add('visible');
+  fetchPrice(url);
+}
+
+async function fetchPrice(url) {
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/tracked_products?url=eq.${encodeURIComponent(url)}&select=price&limit=1`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+    });
+    const data = await resp.json();
+    if (data && data[0]?.price) {
+      const price = `$${parseFloat(data[0].price).toFixed(2)}`;
+      document.getElementById('productPrice').textContent = price;
+      if (detectedProduct) detectedProduct.price = price;
+    } else {
+      document.getElementById('productPrice').textContent = 'Track to monitor';
+    }
+  } catch {
+    document.getElementById('productPrice').textContent = 'Track to monitor';
+  }
+}
+
+document.getElementById('urlInput').addEventListener('input', function() {
+  handleURLChange(this.value.trim());
+  document.getElementById('successMsg').classList.remove('visible');
+});
+
+async function trackProduct() {
+  const url = document.getElementById('urlInput').value.trim();
+  const email = document.getElementById('emailInput').value.trim();
+  const btn = document.getElementById('trackBtn');
+  if (!url || !getSite(url)) {
+    document.getElementById('urlInput').style.borderColor = '#FF4D8D';
+    setTimeout(() => document.getElementById('urlInput').style.borderColor = '', 1500);
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#FF4D8D';
+    setTimeout(() => document.getElementById('emailInput').style.borderColor = '', 1500);
+    return;
+  }
+  const site = getSite(url);
+  const name = getProductNameFromURL(url);
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/tracked_products`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal,resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ email, product_name: name, price: null, original_price: null, url, retailer: site })
+    });
+    if (resp.ok || resp.status === 201 || resp.status === 204) {
+      document.getElementById('successMsg').classList.add('visible');
+      const item = { name, site, url, price: detectedProduct?.price || null };
+      trackedItems = [item, ...trackedItems.filter(i => i.url !== url)].slice(0, 10);
+      localStorage.setItem('snatchedTracked', JSON.stringify(trackedItems));
+      renderTracked();
+      document.getElementById('urlInput').value = '';
+      document.getElementById('emailInput').value = '';
+      document.getElementById('productPreview').classList.remove('visible');
+      detectedProduct = null;
+    } else {
+      btn.textContent = 'Error — try again';
+      btn.style.background = '#e24b4a';
+      setTimeout(() => { btn.style.background = ''; btn.textContent = 'Track'; }, 2000);
+    }
+  } catch {
+    btn.textContent = 'Error — try again';
+    btn.style.background = '#e24b4a';
+    setTimeout(() => { btn.style.background = ''; btn.textContent = 'Track'; }, 2000);
+  } finally {
+    btn.disabled = false;
+    if (btn.textContent === 'Saving…') btn.textContent = 'Track';
+  }
+}
+
+function renderTracked() {
+  if (!trackedItems.length) { document.getElementById('trackedSection').classList.remove('visible'); return; }
+  document.getElementById('trackedSection').classList.add('visible');
+  document.getElementById('trackedList').innerHTML = trackedItems.map(item => `
+    <div class="tracked-item">
+      <div class="tracked-dot"></div>
+      <div class="tracked-name">${item.name}<span class="tracked-retailer">${item.site}</span></div>
+      ${item.price ? `<div class="tracked-price">${item.price}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+renderTracked();
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const banner = document.createElement('button');
+  banner.className = 'install-banner visible';
+  banner.innerHTML = '+ Add Snatched to your home screen';
+  banner.onclick = () => { deferredPrompt.prompt(); banner.remove(); };
+  document.querySelector('main').prepend(banner);
+});
+</script>
+</body>
+</html>
