@@ -368,7 +368,7 @@ async function fetchPrice(url) {
     });
     const data = await resp.json();
     if (data && data[0]?.price) {
-      const price = `$${parseFloat(data[0].price).toFixed(2)}`;
+const price = `$${parseFloat(String(data[0].price).replace(/[^0-9.]/g, '')).toFixed(2)}`;
       document.getElementById('productPrice').textContent = price;
       if (detectedProduct) detectedProduct.price = price;
     } else {
