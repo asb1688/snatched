@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snatched – Product Picks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMRLHPNF1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -8,250 +14,542 @@
     gtag('js', new Date());
     gtag('config', 'G-ZCMRLHPNF1');
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Snatched Picks — AI-Verified Products Worth Buying</title>
-  <meta name="description" content="Shop every beauty and grooming product from the Off Campus cast — AI verified by Snatched." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; }
+    :root {
+      --pink: #FF4D8D;
+      --pink-light: #FFE0ED;
+      --text: #1A1A1A;
+      --muted: #888;
+      --border: #eee;
+      --bg: #fff;
+    }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-    .header { background: linear-gradient(135deg, #FF3CAC, #e91e8c); padding: 40px 40px 32px; text-align: center; }
-    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; color: #fff; text-decoration: none; display: block; }
-    .header-sub { font-size: 15px; color: rgba(255,255,255,0.85); margin-top: 6px; }
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 18px; color: var(--pink); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .nav-links a:hover { color: var(--pink); }
+    .nav-cta {
+      background: var(--pink);
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px !important;
+    }
 
-    .hero { background: #fff0f7; padding: 48px 40px; text-align: center; border-bottom: 1px solid #fce4ec; }
-    .hero-badge { display: inline-block; background: #fce4ec; color: #e91e8c; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 16px; }
-    .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
-    .hero p { font-size: 16px; color: #555; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #fff5f9 0%, #fff 100%);
+      padding: 48px 24px 32px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+    .hero h1 span { color: var(--pink); }
+    .hero p { color: var(--muted); font-size: 15px; }
 
-    .section { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
-    .show-header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-    .show-badge { background: #1a1a1a; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; }
-    .show-title { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; }
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      padding: 16px 24px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      white-space: nowrap;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
 
-    .character-block { margin-bottom: 52px; }
-    .character-title { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .character-sub { font-size: 13px; color: #999; margin-bottom: 20px; }
+    /* MAIN CONTENT */
+    .content { max-width: 900px; margin: 0 auto; padding: 32px 24px 64px; }
 
-    .picks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    /* SECTION */
+    .section { margin-bottom: 56px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .section-title { font-size: 22px; font-weight: 700; }
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pink);
+      background: var(--pink-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
 
-    .pick-card { border: 1.5px solid #f0f0f0; border-radius: 16px; padding: 18px; transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px; }
-    .pick-card:hover { transform: translateY(-4px); border-color: #e91e8c; box-shadow: 0 8px 30px rgba(233,30,140,0.12); }
-    .verdict-badge { display: inline-flex; align-items: center; gap: 6px; background: #e8f5e9; color: #2e7d32; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 100px; width: fit-content; }
-    .verdict-dot { width: 7px; height: 7px; background: #4caf50; border-radius: 50%; }
-    .pick-brand { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
-    .pick-name { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; line-height: 1.3; }
-    .pick-price { font-size: 20px; font-weight: 700; color: #e91e8c; }
-    .pick-reason { font-size: 12px; color: #666; line-height: 1.5; font-style: italic; }
-    .pick-cta { margin-top: auto; background: #1a1a1a; color: #fff; border: none; padding: 9px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; text-align: center; display: block; }
+    /* CHARACTER GROUP */
+    .character-group { margin-bottom: 32px; }
+    .character-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .divider { border: none; border-top: 1px solid #f0f0f0; margin: 0 40px; }
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
 
-    .footer { background: #1a1a1a; padding: 32px 40px; text-align: center; }
-    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #e91e8c; margin-bottom: 8px; }
-    .footer p { font-size: 12px; color: #666; line-height: 1.6; }
-    .footer a { color: #e91e8c; }
+    /* PRODUCT CARD */
+    .product-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .product-card:hover { box-shadow: 0 4px 16px rgba(255,77,141,0.1); border-color: var(--pink-light); }
+    .product-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .product-name { font-size: 14px; font-weight: 600; line-height: 1.35; flex: 1; }
+    .product-brand { font-size: 12px; color: var(--muted); }
+    .product-quote { font-size: 12px; color: #666; font-style: italic; line-height: 1.4; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+    .product-price { font-size: 18px; font-weight: 700; color: var(--pink); }
+    .retailer-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #f5f5f5;
+      color: #555;
+    }
+    .amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--pink);
+      color: #fff;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: opacity 0.2s;
+    }
+    .amazon-btn:hover { opacity: 0.85; }
+
+    /* DIVIDER */
+    .section-divider { height: 1px; background: var(--border); margin-bottom: 56px; }
 
     @media (max-width: 600px) {
-      .hero, .section { padding: 40px 20px; }
-      .header { padding: 28px 20px; }
-      .divider { margin: 0 20px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+      .nav-links a:not(.nav-cta) { display: none; }
     }
   </style>
 </head>
 <body>
-  <nav style="background:#fff;border-bottom:1px solid #f0f0f0;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
-    <a href="/" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#e91e8c;text-decoration:none;">Snatched</a>
-    <div style="display:flex;align-items:center;gap:32px;">
-      <a href="/picks" style="font-size:15px;font-weight:500;color:#e91e8c;text-decoration:none;">Product Picks</a>
-      <a href="/links" style="font-size:15px;font-weight:500;color:#444;text-decoration:none;">Links</a>
-      <a href="/get/" style="background:#e91e8c;color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;">Get Extension →</a>
+
+  <nav>
+    <a href="/" class="nav-logo">Snatched</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/picks.html">Product Picks</a>
+      <a href="/links.html">Links</a>
+      <a href="/get/" class="nav-cta">Get Extension →</a>
     </div>
   </nav>
 
-
-<div class="header">
-  <a href="/" class="logo">Snatched</a>
-  <div class="header-sub">AI-powered shopping advisor for Amazon, Sephora & Ulta</div>
-</div>
-
-<div class="hero">
-  <div class="hero-badge">🟢 AI Verified Picks</div>
-  <h1>Snatched Picks</h1>
-  <p>Products worth buying — verified by Snatched AI after analyzing hundreds of real reviews.</p>
-</div>
-
-<div class="section">
-  <div class="show-header">
-    <div class="show-badge">🎬 Off Campus · Prime Video</div>
+  <div class="hero">
+    <h1>Snatched <span>Product Picks</span></h1>
+    <p>Celebrity-sourced, AI-verified. Track prices before they drop.</p>
   </div>
 
-  <!-- ALLIE HAYES -->
-  <div class="character-block">
-    <div class="character-title">Allie Hayes' Beauty Picks</div>
-    <div class="character-sub">confirmed on screen · available on Amazon</div>
-    <div class="picks-grid">
-      <a class="pick-card" href="https://www.amazon.com/dp/B0032RMX3U?tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Clinique</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Black Honey Lipstick</div>
-        <div class="pick-price">$26</div>
-        <div class="pick-reason">"spotted on screen in the show"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Flawless+Filter&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Charlotte Tilbury</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Flawless Filter</div>
-        <div class="pick-price">$49</div>
-        <div class="pick-reason">"her JLo makeup look staple"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Freck+Beauty+Freck+OG+Faux+Freckle&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Freck Beauty</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Freck OG Faux Freckle</div>
-        <div class="pick-price">$28</div>
-        <div class="pick-reason">"her signature freckle look"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/dp/B0C71VW86M?tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Rhode Skin</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Peptide Lip Treatment</div>
-        <div class="pick-price">$16</div>
-        <div class="pick-reason">"glazed lip base under Black Honey"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterSection('all')">All</button>
+    <button class="filter-btn" onclick="filterSection('off-campus')">Off Campus</button>
+    <button class="filter-btn" onclick="filterSection('celebrity')">Celebrity Beauty</button>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- OFF CAMPUS SECTION -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="section" data-section="off-campus">
+      <div class="section-header">
+        <div class="section-title">Off Campus</div>
+        <div class="section-tag">Prime Video</div>
+      </div>
+      <div class="section-subtitle">Products from the cast — tracked on Snatched so you never pay full price.</div>
+
+      <!-- Allie Hayes -->
+      <div class="character-group">
+        <div class="character-label">Allie Hayes (Mika Abdalla)</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top">
+              <div>
+                <div class="product-name">Clinique Black Honey Almost Lipstick</div>
+                <div class="product-brand">Clinique</div>
+              </div>
+            </div>
+            <div class="product-quote">"Her signature lip for the whole show"</div>
+            <div class="product-bottom">
+              <div class="product-price">$26</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="retailer-badge">Sephora</span>
+                <a class="amazon-btn" href="https://www.amazon.com/s?k=Clinique+Black+Honey+Lipstick&tag=getsnatched03-20" target="_blank">Shop ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-top">
+              <div>
+                <div class="product-name">Charlotte Tilbury Hollywood Flawless Filter</div>
+                <div class="product-brand">Charlotte Tilbury</div>
+              </div>
+            </div>
+            <div class="product-quote">"Luminous base for her JLo glow"</div>
+            <div class="product-bottom">
+              <div class="product-price">$49</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="retailer-badge">Sephora</span>
+                <a class="amazon-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Flawless+Filter&tag=getsnatched03-20" target="_blank">Shop ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-top">
+              <div>
+                <div class="product-name">Freck OG Faux Freckle Pen</div>
+                <div class="product-brand">Freck Beauty</div>
+              </div>
+            </div>
+            <div class="product-quote">"Her signature freckle look"</div>
+            <div class="product-bottom">
+              <div class="product-price">$28</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="retailer-badge">Sephora</span>
+                <a class="amazon-btn" href="https://www.amazon.com/s?k=Freck+OG+Faux+Freckle&tag=getsnatched03-20" target="_blank">Shop ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-top">
+              <div>
+                <div class="product-name">Rhode Peptide Lip Treatment</div>
+                <div class="product-brand">Rhode</div>
+              </div>
+            </div>
+            <div class="product-quote">"Glazed lip base"</div>
+            <div class="product-bottom">
+              <div class="product-price">$16</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="retailer-badge">Sephora</span>
+                <a class="amazon-btn" href="https://www.amazon.com/s?k=Rhode+Peptide+Lip+Treatment&tag=getsnatched03-20" target="_blank">Shop ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hannah Wells -->
+      <div class="character-group">
+        <div class="character-label">Hannah Wells</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">e.l.f. Halo Glow Liquid Filter</div><div class="product-brand">e.l.f.</div></div></div>
+            <div class="product-quote">"Glass skin in a bottle"</div>
+            <div class="product-bottom"><div class="product-price">$14</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=elf+Halo+Glow+Liquid+Filter&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Rare Beauty Soft Pinch Tinted Lip Oil</div><div class="product-brand">Rare Beauty</div></div></div>
+            <div class="product-quote">"Everywhere on TikTok rn"</div>
+            <div class="product-bottom"><div class="product-price">$22</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Rare+Beauty+Soft+Pinch+Lip+Oil&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Glow Recipe Toner Pads</div><div class="product-brand">Glow Recipe</div></div></div>
+            <div class="product-quote">"5 acids, zero irritation"</div>
+            <div class="product-bottom"><div class="product-price">$25</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Glow+Recipe+Toner+Pads&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Rhode Glazing Milk</div><div class="product-brand">Rhode</div></div></div>
+            <div class="product-quote">"The glass skin serum"</div>
+            <div class="product-bottom"><div class="product-price">$29</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Rhode+Glazing+Milk&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Garrett Graham (Belmont Cameli) -->
+      <div class="character-group">
+        <div class="character-label">Garrett Graham (Belmont Cameli)</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Rhode Peptide Glazing Fluid</div><div class="product-brand">Rhode</div></div></div>
+            <div class="product-quote">"Preps and deeply hydrates for a natural dewy base"</div>
+            <div class="product-bottom"><div class="product-price">$29</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Skincare</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Rhode+Peptide+Glazing+Fluid&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Ciele Cosmetics Clean Complexion Tint</div><div class="product-brand">Ciele</div></div></div>
+            <div class="product-quote">"Clean skin-protecting complexion enhancement"</div>
+            <div class="product-bottom"><div class="product-price">$42</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Skincare</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Ciele+Cosmetics+Tint&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Blind Barber 90 Proof Pomade</div><div class="product-brand">Blind Barber</div></div></div>
+            <div class="product-quote">"Foundational formula to manage and structure his hair"</div>
+            <div class="product-bottom"><div class="product-price">$18</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Haircare</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Blind+Barber+Pomade&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Roz Hair Curl Defining Cream</div><div class="product-brand">Roz Hair</div></div></div>
+            <div class="product-quote">"Defines and adds clean texture to his signature curls"</div>
+            <div class="product-bottom"><div class="product-price">$28</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Haircare</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Roz+Hair+Curl+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ella Bright -->
+      <div class="character-group">
+        <div class="character-label">Ella Bright — Press Tour Glam</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Dior Forever Skin Correct Complexion Stick</div><div class="product-brand">Dior · MUA Misha Shahzada</div></div></div>
+            <div class="product-quote">"Her base for the entire press tour"</div>
+            <div class="product-bottom"><div class="product-price">$52</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Dior+Forever+Skin+Correct&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Freck OG Faux Freckle Pen</div><div class="product-brand">Freck Beauty</div></div></div>
+            <div class="product-quote">"Her signature fake freckle look"</div>
+            <div class="product-bottom"><div class="product-price">$28</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Freck+OG+Faux+Freckle&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">ghd Platinum+ Styler</div><div class="product-brand">ghd · stylist Jacob Rozenberg</div></div></div>
+            <div class="product-quote">"Soft bouncy waves brushed out for red carpet"</div>
+            <div class="product-bottom"><div class="product-price">$319</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=ghd+Platinum+Styler&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Redken Spray Wax</div><div class="product-brand">Redken · Jacob Rozenberg</div></div></div>
+            <div class="product-quote">"Piecey lived-in texture through curls"</div>
+            <div class="product-bottom"><div class="product-price">$28</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Redken+Spray+Wax&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- BELMONT CAMELI -->
-  <div class="character-block">
-    <div class="character-title">Belmont Cameli's Grooming Picks</div>
-    <div class="character-sub">by groomer Aika Danica Flores · available on Amazon</div>
-    <div class="picks-grid">
-      <a class="pick-card" href="https://www.amazon.com/s?k=Rhode+Peptide+Glazing+Fluid&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Rhode</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Peptide Glazing Fluid</div>
-        <div class="pick-reason">"Preps and deeply hydrates for a natural dewy base"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Ciele+Cosmetics+Clean+Complexion+Tint&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Ciele Cosmetics</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Clean Complexion Tint</div>
-        <div class="pick-reason">"Clean skin-protecting complexion enhancement on the red carpet"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Blind+Barber+Styling+Pomade&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Blind Barber</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Styling Pomade</div>
-        <div class="pick-reason">"Foundational formula to manage and structure his hair"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Roz+Hair+Curl+Defining+Cream&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Roz Hair</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Curl Defining Cream</div>
-        <div class="pick-reason">"Defines and adds clean texture to his signature natural curls"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
+    <div class="section-divider"></div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CELEBRITY BEAUTY SECTION -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="section" data-section="celebrity">
+      <div class="section-header">
+        <div class="section-title">Celebrity Beauty</div>
+        <div class="section-tag">MUA Confirmed</div>
+      </div>
+      <div class="section-subtitle">Products confirmed by their glam teams — tracked so you never pay full price.</div>
+
+      <!-- Hailey Bieber -->
+      <div class="character-group">
+        <div class="character-label">Hailey Bieber — Glazed Skin</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Make Up For Ever Artist Color Pencil — Wherever Walnut</div><div class="product-brand">Make Up For Ever</div></div></div>
+            <div class="product-quote">"Her go-to liner for the glazed look"</div>
+            <div class="product-bottom"><div class="product-price">$26</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Make+Up+For+Ever+Artist+Color+Pencil&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Hourglass Veil Hydrating Skin Tint</div><div class="product-brand">Hourglass</div></div></div>
+            <div class="product-quote">"Skin-like coverage"</div>
+            <div class="product-bottom"><div class="product-price">$49</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Hourglass+Veil+Hydrating+Skin+Tint&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Kosas Revealer Concealer</div><div class="product-brand">Kosas</div></div></div>
+            <div class="product-quote">"Clean, brightening"</div>
+            <div class="product-bottom"><div class="product-price">$30</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Kosas+Revealer+Concealer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sofia Vergara -->
+      <div class="character-group">
+        <div class="character-label">Sofia Vergara — confirmed by MUA Sabrina Bedrani</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Charlotte Tilbury Magic Cream</div><div class="product-brand">Charlotte Tilbury</div></div></div>
+            <div class="product-quote">"Her premiere night base"</div>
+            <div class="product-bottom"><div class="product-price">$105</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Charlotte Tilbury Hollywood Flawless Filter</div><div class="product-brand">Charlotte Tilbury</div></div></div>
+            <div class="product-quote">"Luminous complexion prep"</div>
+            <div class="product-bottom"><div class="product-price">$49</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Flawless+Filter&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Charlotte Tilbury Magic Foundation</div><div class="product-brand">Charlotte Tilbury</div></div></div>
+            <div class="product-quote">"Her red carpet foundation"</div>
+            <div class="product-bottom"><div class="product-price">$69</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Foundation&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Euphoria Cast -->
+      <div class="character-group">
+        <div class="character-label">Euphoria Cast Beauty</div>
+        <div class="product-grid">
+          <!-- Zendaya -->
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">African Black Soap Cleanser</div><div class="product-brand">Zendaya</div></div></div>
+            <div class="product-quote">"I find it therapeutic to do all the steps"</div>
+            <div class="product-bottom"><div class="product-price">$14</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=African+Black+Soap+Cleanser&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Rosewater Toner</div><div class="product-brand">Zendaya</div></div></div>
+            <div class="product-quote">"Rose petal toner is a staple"</div>
+            <div class="product-bottom"><div class="product-price">$18</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora · Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Rosewater+Toner+skincare&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Charlotte Tilbury Magic Cream</div><div class="product-brand">Zendaya</div></div></div>
+            <div class="product-quote">"Her premiere night base"</div>
+            <div class="product-bottom"><div class="product-price">$105</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <!-- Sydney Sweeney -->
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Laneige Lip Sleeping Mask</div><div class="product-brand">Sydney Sweeney</div></div></div>
+            <div class="product-quote">"I have one on me at all times"</div>
+            <div class="product-bottom"><div class="product-price">$24</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora · Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Laneige+Lip+Sleeping+Mask&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Laneige Water Bank Hyaluronic Cream</div><div class="product-brand">Sydney Sweeney</div></div></div>
+            <div class="product-quote">"Feels like putting a cloud on your face"</div>
+            <div class="product-bottom"><div class="product-price">$45</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Laneige+Water+Bank+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Ice Roller</div><div class="product-brand">Sydney Sweeney</div></div></div>
+            <div class="product-quote">"I love to ice roll every morning"</div>
+            <div class="product-bottom"><div class="product-price">$35</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora · Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Ice+Roller+face&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <!-- Hunter Schafer -->
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Shiseido Moisturizer</div><div class="product-brand">Hunter Schafer</div></div></div>
+            <div class="product-quote">"I shower and put on moisturiser — that's it"</div>
+            <div class="product-bottom"><div class="product-price">$42</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Shiseido+Moisturizer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Half Magic Eye Pigment</div><div class="product-brand">Hunter Schafer</div></div></div>
+            <div class="product-quote">"All about the eye makeup"</div>
+            <div class="product-bottom"><div class="product-price">$20</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Half+Magic+Eye+Pigment&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Glitter Liner</div><div class="product-brand">Hunter Schafer</div></div></div>
+            <div class="product-quote">"Eccentric eye looks fans try to copy"</div>
+            <div class="product-bottom"><div class="product-price">$22</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora · Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Glitter+Liner+eye&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <!-- Alexa Demie -->
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Dior Backstage Face & Body Foundation</div><div class="product-brand">Alexa Demie · Vogue Beauty Secrets</div></div></div>
+            <div class="product-quote">"Her go-to from the tutorial"</div>
+            <div class="product-bottom"><div class="product-price">$52</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Dior+Backstage+Face+Body+Foundation&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">NARS Radiant Creamy Concealer</div><div class="product-brand">Alexa Demie</div></div></div>
+            <div class="product-quote">"Staple in her glam routine"</div>
+            <div class="product-bottom"><div class="product-price">$34</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=NARS+Radiant+Creamy+Concealer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">MAC Eyebrows Big Boost Fibre Gel</div><div class="product-brand">Alexa Demie</div></div></div>
+            <div class="product-quote">"Bold, full brows"</div>
+            <div class="product-bottom"><div class="product-price">$24</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=MAC+Eyebrows+Big+Boost+Fibre+Gel&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">MAC Lip Pencil in Laurel</div><div class="product-brand">Alexa Demie</div></div></div>
+            <div class="product-quote">"Her signature overlined lip"</div>
+            <div class="product-bottom"><div class="product-price">$22</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Sephora</span><a class="amazon-btn" href="https://www.amazon.com/s?k=MAC+Lip+Pencil+Laurel&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Madison Beer & Selena Gomez -->
+      <div class="character-group">
+        <div class="character-label">Madison Beer & Selena Gomez — MUA obsession</div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-top"><div><div class="product-name">Dr. Althea 345 Relief Cream</div><div class="product-brand">Dr. Althea</div></div></div>
+            <div class="product-quote">"K-beauty's most viral moisturizer — used by both their MUAs as skin prep before foundation"</div>
+            <div class="product-bottom"><div class="product-price">$36</div><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Ulta</span><a class="amazon-btn" href="https://www.amazon.com/s?k=Dr+Althea+345+Relief+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
   </div>
 
-  <!-- ELLA BRIGHT -->
-  <div class="character-block">
-    <div class="character-title">Ella Bright's Press Tour Beauty Picks</div>
-    <div class="character-sub">by her glam team · available on Amazon</div>
-    <div class="picks-grid">
-      <a class="pick-card" href="https://www.amazon.com/s?k=Dior+Forever+Skin+Correct+Complexion+Stick&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Dior</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Forever Skin Correct Complexion Stick</div>
-        <div class="pick-price">$52</div>
-        <div class="pick-reason">"Her base for the entire press tour" — MUA Misha Shahzada</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Freck+Beauty+Freck+OG+Faux+Freckle&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Freck Beauty</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Freck OG Faux Freckle</div>
-        <div class="pick-price">$28</div>
-        <div class="pick-reason">"Her signature fake freckle look"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=GHD+Platinum+Plus+Styler&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">GHD</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Platinum+ Styler</div>
-        <div class="pick-price">$319</div>
-        <div class="pick-reason">"Soft bouncy waves brushed out for red carpet" — stylist Jacob Rozenberg</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Redken+Spray+Wax&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Redken</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Spray Wax</div>
-        <div class="pick-price">$28</div>
-        <div class="pick-reason">"Piecey lived-in texture through curls" — Jacob Rozenberg</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- HANNAH WELLS -->
-  <div class="character-block">
-    <div class="character-title">What Hannah Wells Would Track</div>
-    <div class="character-sub">budget beauty picks · Sephora & Ulta · available on Amazon</div>
-    <div class="picks-grid">
-      <a class="pick-card" href="https://www.amazon.com/s?k=elf+Halo+Glow+Liquid+Filter&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">e.l.f.</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Halo Glow Liquid Filter</div>
-        <div class="pick-price">$14</div>
-        <div class="pick-reason">"Glass skin in a bottle"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Rare+Beauty+Soft+Pinch+Tinted+Lip+Oil&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Rare Beauty</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Soft Pinch Tinted Lip Oil</div>
-        <div class="pick-price">$22</div>
-        <div class="pick-reason">"Everywhere on TikTok rn"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Glow+Recipe+Toner+Pads&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Glow Recipe</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Toner Pads</div>
-        <div class="pick-price">$25</div>
-        <div class="pick-reason">"5 acids, zero irritation"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/s?k=Rhode+Glazing+Milk&tag=getsnatched03-20" target="_blank" rel="nofollow">
-        <div class="pick-brand">Rhode</div>
-        <div class="verdict-badge"><div class="verdict-dot"></div> Buy</div>
-        <div class="pick-name">Glazing Milk</div>
-        <div class="pick-price">$29</div>
-        <div class="pick-reason">"Finally at Sephora — the glass skin serum"</div>
-        <div class="pick-cta">Shop on Amazon →</div>
-      </a>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">
-  <div class="footer-logo">Snatched</div>
-  <p style="color:#e91e8c;margin-bottom:8px;">Get the free Chrome extension → <a href="/get/">get-snatched.com/get</a></p>
-  <p>Snatched may earn a commission on Amazon purchases. All verdicts are generated by AI analysis of real customer reviews.</p>
-</div>
+  <script>
+    function filterSection(key) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.section[data-section]').forEach(s => {
+        if (key === 'all' || s.dataset.section === key) {
+          s.style.display = '';
+        } else {
+          s.style.display = 'none';
+        }
+      });
+      document.querySelectorAll('.section-divider').forEach(d => {
+        d.style.display = key === 'all' ? '' : 'none';
+      });
+    }
+  </script>
 
 </body>
 </html>
