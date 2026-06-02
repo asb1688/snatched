@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="refresh" content="0; url=https://chromewebstore.google.com/detail/snatched/hcdlgnlefjhejhlpgmmgmehknekphamm">
-<script>window.location.href = "https://chromewebstore.google.com/detail/snatched/hcdlgnlefjhejhlpgmmgmehknekphamm";</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMRLHPNF1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZCMRLHPNF1');
+
+  var storeUrl = "https://chromewebstore.google.com/detail/snatched/hcdlgnlefjhejhlpgmmgmehknekphamm";
+  function redirect() {
+    window.location.href = storeUrl;
+  }
+
+  gtag('event', 'chrome_store_redirect', {
+    event_callback: redirect,
+    event_timeout: 2000
+  });
+  setTimeout(redirect, 2000);
+</script>
+<meta http-equiv="refresh" content="2; url=https://chromewebstore.google.com/detail/snatched/hcdlgnlefjhejhlpgmmgmehknekphamm">
 </head>
 <body>Redirecting...</body>
 </html>
