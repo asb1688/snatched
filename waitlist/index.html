@@ -300,17 +300,11 @@
         fbq('track', 'Lead');
       }
 
-      // Save to Supabase
       try {
-        await fetch('https://zehbulrwadwvpbxunrnb.supabase.co/rest/v1/subscribers', {
+        await fetch('https://snatched-api.vercel.app/api/waitlist', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGJ1bHJ3YWR3dnBieHVucm5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU1MjY5NTMsImV4cCI6MjA2MTEwMjk1M30.nYbHDFBuMHIk0LNrjzYGGgvfvdLJPD7A3VL3p7H6ybs',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplaGJ1bHJ3YWR3dnBieHVucm5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU1MjY5NTMsImV4cCI6MjA2MTEwMjk1M30.nYbHDFBuMHIk0LNrjzYGGgvfvdLJPD7A3VL3p7H6ybs',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({ email, source: 'waitlist' })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
         });
       } catch(e) {}
 
