@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snatched – Product Picks – Love Island S8</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMRLHPNF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZCMRLHPNF1');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF4D8D;
+      --pink-dim: rgba(255,77,141,0.15);
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --surface2: #222;
+      --text: #f0f0f0;
+      --muted: #666;
+      --border: rgba(255,255,255,0.08);
+    }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 18px; color: var(--pink); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--pink); }
+    .nav-cta {
+      background: var(--pink);
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px !important;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .hero h1 span { color: var(--pink); }
+    .hero p { color: var(--muted); font-size: 15px; }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      padding: 16px 24px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      white-space: nowrap;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #aaa;
+      transition: all 0.2s;
+    }
+    a.filter-btn { text-decoration: none; display: inline-block; }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+
+    /* MAIN */
+    .content { max-width: 960px; margin: 0 auto; padding: 32px 40px 64px; width: 100%; }
+
+    .section { margin-bottom: 56px; }
+    .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+    .section-title { font-size: 22px; font-weight: 700; color: #fff; }
+    .section-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--pink);
+      background: var(--pink-dim); padding: 3px 8px; border-radius: 4px;
+    }
+    .section-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+    .character-group { margin-bottom: 32px; width: 100%; overflow: hidden; }
+    .character-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .product-card:hover { border-color: var(--pink); background: var(--surface2); }
+    .product-name { font-size: 16px; font-weight: 700; line-height: 1.35; color: #fff; }
+    .product-brand { font-size: 13px; color: #aaa; margin-top: 2px; }
+    .product-quote { font-size: 13px; color: #bbb; font-style: italic; line-height: 1.5; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+    .product-price { font-size: 22px; font-weight: 700; color: var(--pink); }
+    .retailer-badge {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      background: rgba(255,255,255,0.08); color: #aaa;
+    }
+    .shop-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--pink); color: #fff; text-decoration: none;
+      font-size: 11px; font-weight: 600; padding: 5px 10px;
+      border-radius: 6px; transition: opacity 0.2s;
+    }
+    .shop-btn:hover { opacity: 0.85; }
+
+    .section-divider { height: 1px; background: var(--border); margin-bottom: 56px; }
+
+
+    /* CHARACTER DROPDOWN */
+    .char-selector {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      margin-top: 8px;
+    }
+    .char-btn {
+      padding: 10px 20px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #aaa;
+      transition: all 0.2s;
+    }
+    .char-btn:hover, .char-btn.active {
+      background: rgba(255,77,141,0.15);
+      color: var(--pink);
+      border-color: var(--pink);
+    }
+    .char-section { display: none; }
+    .char-section.active { display: block; }
+
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1483243113266758');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1483243113266758&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Snatched</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/picks/">Product Picks</a>
+      <a href="/links.html">Links</a>
+      <a href="/get/" class="nav-cta">Get Extension →</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Snatched <span>Product Picks</span></h1>
+    <p>Celebrity-sourced, AI-verified. Track prices before they drop.</p>
+    <p style="font-size:12px;color:#555;margin-top:6px;">Prices shown are approximate and may vary. Click Shop ↗ for current Amazon pricing.</p>
+  </div>
+
+
+
+  <div class="filter-bar">
+    <a href="/picks/" class="filter-btn">All</a>
+    <a href="/picks/off-campus/" class="filter-btn">Off Campus</a>
+    <a href="/picks/celebrity/" class="filter-btn">Celebrity Beauty</a>
+    <a href="/picks/loveisland/" class="filter-btn active">Love Island S8</a>
+  </div>
+  <div class="content">
+
+    <!-- LOVE ISLAND -->
+    <div class="section" data-section="loveisland" style="max-width:960px;margin-left:auto;margin-right:auto;padding:0 40px;">
+      <div class="section-header">
+        <div class="section-title">Love Island USA Season 8</div>
+        <div class="section-tag">Peacock · Updated Daily</div>
+      </div>
+      <div class="section-subtitle">Villa outfits tracked daily — Amazon dupes for what the Islanders are wearing. New episodes drop every day except Wednesdays.</div>
+
+      <div class="character-group">
+        <div class="character-label">Episode 1 — Villa Entrances</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Yellow Halter Plunge Maxi Gown</div><div class="product-brand">Kenzie · Dupe for Oh Polly Yellow Halter Gown</div><div class="product-quote">"Her entrance look — backless halterneck in pastel yellow"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=yellow+halter+plunge+backless+maxi+gown&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Red Asymmetric Cutout Mini Dress</div><div class="product-brand">Kenzie · Dupe for Outcast Red Cutout Mini</div><div class="product-quote">"Red hot villa mini — asymmetric cutout detail"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=red+asymmetric+cutout+mini+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Navy Blue Sequin Two-Piece Skirt Set</div><div class="product-brand">Trinity · Dupe for Mars the Label Sequin Set</div><div class="product-quote">"Backless sequin crop top with matching maxi skirt"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=navy+sequin+two+piece+crop+top+maxi+skirt+set&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Blue Cutout Open Back Maxi Dress</div><div class="product-brand">Melanie · Dupe for Jaded London Blue Cutout Maxi</div><div class="product-quote">"Turquoise cutout maxi with open back — her entrance look"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=blue+cutout+open+back+maxi+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Orange Sequin Asymmetric Cutout Maxi Dress</div><div class="product-brand">Aniya · Dupe for Outcast Orange Sequin Maxi</div><div class="product-quote">"Showstopping entrance — orange sequin with asymmetric cutout"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=orange+sequin+asymmetric+cutout+maxi+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Black Asymmetric Maxi Gown</div><div class="product-brand">Ariana Madix · Dupe for Tom Ford Black Gown</div><div class="product-quote">"Host's dramatic opening look — black asymmetric gown"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=black+asymmetric+one+shoulder+maxi+gown&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Lilac Purple Crystal Embellished Mini Dress</div><div class="product-brand">Ariana Madix · Dupe for AREA Lilac Crystal Mini</div><div class="product-quote">"Host's purple sparkle look — crystal embellished mini"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=lilac+purple+crystal+embellished+mini+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+      <div class="character-group">
+        <div class="character-label">Episode 2 — Villa Looks</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Zebra-Print Asymmetric Midi Dress</div><div class="product-brand">Kenzie · Dupe for Outcast Zebra Midi</div><div class="product-quote">"Bold zebra asymmetric midi — her most talked about villa look"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=zebra+print+asymmetric+midi+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Blue Floral Swimsuit & Maxi Dress Set</div><div class="product-brand">Beatriz · Dupe for Shein Blue Floral Set</div><div class="product-quote">"Pool day look — blue floral swimsuit with matching maxi coverup"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=blue+floral+swimsuit+maxi+dress+set&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Blue Bustier Cutout Mini Dress</div><div class="product-brand">Beatriz · Dupe for Shein Blue Bustier Mini</div><div class="product-quote">"Villa night out — structured bustier with cutout detail"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=blue+bustier+cutout+mini+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Yellow Crop Top & Maxi Skirt Set</div><div class="product-brand">Kayda · Dupe for Shein Yellow Set</div><div class="product-quote">"Bright yellow two piece — crop top with flowing maxi skirt"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=yellow+crop+top+maxi+skirt+set&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Green Plunge Cutout Midi Dress</div><div class="product-brand">Trinity · Dupe for CouCoo Green Plunge Midi</div><div class="product-quote">"Fresh green cutout midi — deep plunge neckline"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=green+plunge+cutout+midi+dress&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Designer-Inspired Gold Strappy Sandals</div><div class="product-brand">Trinity · Amazon exact match</div><div class="product-quote">"Her exact gold sandals — designer inspired, Amazon price"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=designer+inspired+gold+strappy+sandals&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    function showChar(id, btn) {
+      document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      const el = document.getElementById('char-' + id);
+      if (el) el.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snatched – Product Picks – Celebrity Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMRLHPNF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZCMRLHPNF1');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF4D8D;
+      --pink-dim: rgba(255,77,141,0.15);
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --surface2: #222;
+      --text: #f0f0f0;
+      --muted: #666;
+      --border: rgba(255,255,255,0.08);
+    }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 18px; color: var(--pink); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--pink); }
+    .nav-cta {
+      background: var(--pink);
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px !important;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .hero h1 span { color: var(--pink); }
+    .hero p { color: var(--muted); font-size: 15px; }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      padding: 16px 24px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      white-space: nowrap;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #aaa;
+      transition: all 0.2s;
+    }
+    a.filter-btn { text-decoration: none; display: inline-block; }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+
+    /* MAIN */
+    .content { max-width: 960px; margin: 0 auto; padding: 32px 40px 64px; width: 100%; }
+
+    .section { margin-bottom: 56px; }
+    .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+    .section-title { font-size: 22px; font-weight: 700; color: #fff; }
+    .section-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--pink);
+      background: var(--pink-dim); padding: 3px 8px; border-radius: 4px;
+    }
+    .section-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+    .character-group { margin-bottom: 32px; width: 100%; overflow: hidden; }
+    .character-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .product-card:hover { border-color: var(--pink); background: var(--surface2); }
+    .product-name { font-size: 16px; font-weight: 700; line-height: 1.35; color: #fff; }
+    .product-brand { font-size: 13px; color: #aaa; margin-top: 2px; }
+    .product-quote { font-size: 13px; color: #bbb; font-style: italic; line-height: 1.5; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+    .product-price { font-size: 22px; font-weight: 700; color: var(--pink); }
+    .retailer-badge {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      background: rgba(255,255,255,0.08); color: #aaa;
+    }
+    .shop-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--pink); color: #fff; text-decoration: none;
+      font-size: 11px; font-weight: 600; padding: 5px 10px;
+      border-radius: 6px; transition: opacity 0.2s;
+    }
+    .shop-btn:hover { opacity: 0.85; }
+
+    .section-divider { height: 1px; background: var(--border); margin-bottom: 56px; }
+
+
+    /* CHARACTER DROPDOWN */
+    .char-selector {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      margin-top: 8px;
+    }
+    .char-btn {
+      padding: 10px 20px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #aaa;
+      transition: all 0.2s;
+    }
+    .char-btn:hover, .char-btn.active {
+      background: rgba(255,77,141,0.15);
+      color: var(--pink);
+      border-color: var(--pink);
+    }
+    .char-section { display: none; }
+    .char-section.active { display: block; }
+
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1483243113266758');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1483243113266758&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Snatched</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/picks/">Product Picks</a>
+      <a href="/links.html">Links</a>
+      <a href="/get/" class="nav-cta">Get Extension →</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Snatched <span>Product Picks</span></h1>
+    <p>Celebrity-sourced, AI-verified. Track prices before they drop.</p>
+    <p style="font-size:12px;color:#555;margin-top:6px;">Prices shown are approximate and may vary. Click Shop ↗ for current Amazon pricing.</p>
+  </div>
+
+
+
+  <div class="filter-bar">
+    <a href="/picks/" class="filter-btn">All</a>
+    <a href="/picks/off-campus/" class="filter-btn">Off Campus</a>
+    <a href="/picks/celebrity/" class="filter-btn active">Celebrity Beauty</a>
+    <a href="/picks/loveisland/" class="filter-btn">Love Island S8</a>
+  </div>
+  <div class="content">
+
+    <!-- CELEBRITY BEAUTY -->
+    <div class="section" data-section="celebrity" style="max-width:960px;margin-left:auto;margin-right:auto;padding:0 40px;">
+      <div class="section-header">
+        <div class="section-title">Celebrity Beauty</div>
+        <div class="section-tag">MUA Confirmed</div>
+      </div>
+      <div class="section-subtitle">Products confirmed by their glam teams — tracked so you never pay full price.</div>
+
+      <div class="character-group">
+        <div class="character-label">Hailey Bieber — Glazed Skin</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Make Up For Ever Artist Color Pencil — Wherever Walnut</div><div class="product-brand">Make Up For Ever</div><div class="product-quote">"Her go-to liner for the glazed look"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Make+Up+For+Ever+Artist+Color+Pencil&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Hourglass Veil Hydrating Skin Tint</div><div class="product-brand">Hourglass</div><div class="product-quote">"Skin-like coverage"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Hourglass+Veil+Hydrating+Skin+Tint&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Kosas Revealer Concealer</div><div class="product-brand">Kosas</div><div class="product-quote">"Clean, brightening"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Kosas+Revealer+Concealer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+      <div class="character-group">
+        <div class="character-label">Sofia Vergara — confirmed by MUA Sabrina Bedrani</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Charlotte Tilbury Magic Cream</div><div class="product-brand">Charlotte Tilbury</div><div class="product-quote">"Her premiere night base"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Charlotte Tilbury Hollywood Flawless Filter</div><div class="product-brand">Charlotte Tilbury</div><div class="product-quote">"Luminous complexion prep"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Flawless+Filter&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Charlotte Tilbury Magic Foundation</div><div class="product-brand">Charlotte Tilbury</div><div class="product-quote">"Her red carpet foundation"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Foundation&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+      <div class="character-group">
+        <div class="character-label">Euphoria Cast</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">African Black Soap Cleanser</div><div class="product-brand">Zendaya</div><div class="product-quote">"I find it therapeutic to do all the steps"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=African+Black+Soap+Cleanser&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Rosewater Toner</div><div class="product-brand">Zendaya</div><div class="product-quote">"Rose petal toner is a staple"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Rosewater+Toner+skincare&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Charlotte Tilbury Magic Cream</div><div class="product-brand">Zendaya</div><div class="product-quote">"Her premiere night base"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Charlotte+Tilbury+Magic+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Laneige Lip Sleeping Mask</div><div class="product-brand">Sydney Sweeney</div><div class="product-quote">"I have one on me at all times"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Laneige+Lip+Sleeping+Mask&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Laneige Water Bank Hyaluronic Cream</div><div class="product-brand">Sydney Sweeney</div><div class="product-quote">"Feels like putting a cloud on your face"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Laneige+Water+Bank+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Ice Roller</div><div class="product-brand">Sydney Sweeney</div><div class="product-quote">"I love to ice roll every morning"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Ice+Roller+face&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Shiseido Moisturizer</div><div class="product-brand">Hunter Schafer</div><div class="product-quote">"I shower and put on moisturiser — that's it"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Shiseido+Moisturizer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Half Magic Eye Pigment</div><div class="product-brand">Hunter Schafer</div><div class="product-quote">"All about the eye makeup"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Half+Magic+Eye+Pigment&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Glitter Liner</div><div class="product-brand">Hunter Schafer</div><div class="product-quote">"Eccentric eye looks fans try to copy"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Glitter+Liner+eye&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Dior Backstage Face & Body Foundation</div><div class="product-brand">Alexa Demie · Vogue Beauty Secrets</div><div class="product-quote">"Her go-to from the tutorial"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Dior+Backstage+Face+Body+Foundation&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">NARS Radiant Creamy Concealer</div><div class="product-brand">Alexa Demie</div><div class="product-quote">"Staple in her glam routine"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=NARS+Radiant+Creamy+Concealer&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">MAC Eyebrows Big Boost Fibre Gel</div><div class="product-brand">Alexa Demie</div><div class="product-quote">"Bold, full brows"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=MAC+Eyebrows+Big+Boost+Fibre+Gel&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">MAC Lip Pencil in Laurel</div><div class="product-brand">Alexa Demie</div><div class="product-quote">"Her signature overlined lip"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=MAC+Lip+Pencil+Laurel&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+      <div class="character-group">
+        <div class="character-label">Madison Beer & Selena Gomez — MUA obsession</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Dr. Althea 345 Relief Cream</div><div class="product-brand">Dr. Althea</div><div class="product-quote">"K-beauty's most viral moisturizer — used by both their MUAs as skin prep before foundation"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?k=Dr+Althea+345+Relief+Cream&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    function showChar(id, btn) {
+      document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      const el = document.getElementById('char-' + id);
+      if (el) el.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
