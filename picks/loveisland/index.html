@@ -16,18 +16,18 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --pink: #FF4D8D;
-      --pink-dim: rgba(255,77,141,0.15);
-      --bg: #0d0d0d;
-      --surface: #1a1a1a;
+      --pink: #FF6450;
+      --pink-dim: rgba(255,100,80,0.15);
+      --bg: #FFC8B4;
+      --surface: #FFEBE6;
       --surface2: #222;
-      --text: #f0f0f0;
-      --muted: #666;
-      --border: rgba(255,255,255,0.08);
+      --text: #3C2840;
+      --muted: #786070;
+      --border: #DCBCC0;
     }
     body {
       font-family: 'Space Grotesk', sans-serif;
-      background: var(--bg);
+      background: linear-gradient(180deg, #FFC8B4 0%, #FFAAC8 40%, #B4D2FF 100%);
       color: var(--text);
       min-height: 100vh;
     }
@@ -64,7 +64,7 @@
       text-align: center;
       border-bottom: 1px solid var(--border);
     }
-    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #3C2840; }
     .hero h1 span { color: var(--pink); }
     .hero p { color: var(--muted); font-size: 15px; }
 
@@ -105,18 +105,18 @@
 
     .section { margin-bottom: 56px; }
     .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
-    .section-title { font-size: 22px; font-weight: 700; color: #fff; }
+    .section-title { font-size: 22px; font-weight: 700; color: #3C2840; }
     .section-tag {
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--pink);
-      background: var(--pink-dim); padding: 3px 8px; border-radius: 4px;
+      text-transform: uppercase; color: #FF6450;
+      background: rgba(255,100,80,0.15); padding: 3px 8px; border-radius: 4px;
     }
     .section-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
 
     .character-group { margin-bottom: 32px; width: 100%; overflow: hidden; }
     .character-label {
       font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--pink);
+      text-transform: uppercase; color: #3C2840;
       margin-bottom: 12px; padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
     }
