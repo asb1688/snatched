@@ -16,18 +16,18 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --pink: #FF4D8D;
+      --pink: #c8a165;
       --pink-dim: rgba(255,77,141,0.15);
-      --bg: #0d0d0d;
-      --surface: #1a1a1a;
-      --surface2: #222;
-      --text: #f0f0f0;
-      --muted: #666;
-      --border: rgba(255,255,255,0.08);
+      --bg: #0e1a2b;
+      --surface: #162235;
+      --surface2: #1c2d42;
+      --text: #f0ebe0;
+      --muted: #8a9bb0;
+      --border: rgba(255,255,255,0.1);
     }
     body {
       font-family: 'Space Grotesk', sans-serif;
-      background: var(--bg);
+      background-color: #0e1a2b;
       color: var(--text);
       min-height: 100vh;
     }
@@ -108,15 +108,15 @@
     .section-title { font-size: 22px; font-weight: 700; color: #fff; }
     .section-tag {
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--pink);
-      background: var(--pink-dim); padding: 3px 8px; border-radius: 4px;
+      text-transform: uppercase; color: #c8a165;
+      background: rgba(200,161,101,0.15); padding: 3px 8px; border-radius: 4px;
     }
     .section-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
 
     .character-group { margin-bottom: 32px; width: 100%; overflow: hidden; }
     .character-label {
       font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--pink);
+      text-transform: uppercase; color: #e8b86d;
       margin-bottom: 12px; padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
     }
@@ -152,7 +152,7 @@
     }
     .shop-btn {
       display: inline-flex; align-items: center; gap: 4px;
-      background: var(--pink); color: #fff; text-decoration: none;
+      background: #c8a165; color: #fff; text-decoration: none;
       font-size: 11px; font-weight: 600; padding: 5px 10px;
       border-radius: 6px; transition: opacity 0.2s;
     }
@@ -248,6 +248,19 @@
         <div class="section-tag">Prime Video</div>
       </div>
       <div class="section-subtitle">Products from the cast — tracked on Snatched so you never pay full price.</div>
+
+      <div class="character-group">
+        <div class="character-label">Official Amazon Products — As Seen on Off Campus</div>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-name">Liquid I.V. Hydration Multiplier</div><div class="product-brand">Garrett, Logan & Hannah — on-screen product placement</div><div class="product-quote">"The most talked-about product placement on the show — fans spotted it everywhere"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B0CSQWZPBX?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Clinique Almost Lipstick in Black Honey</div><div class="product-brand">Allie Hayes — MUA confirmed on-set</div><div class="product-quote">"Used on-set to give Allie her signature stained glossy pout"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B0032RMX3U?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Saie Glowy Super Gel Illuminator</div><div class="product-brand">Allie Hayes — MUA confirmed on-set</div><div class="product-quote">"MUA's go-to for Allie's signature skin sheen — natural awake glow"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B09MZRTG3D?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Rare Beauty Soft Pinch Liquid Blush</div><div class="product-brand">Hannah Wells — MUA confirmed on-set</div><div class="product-quote">"Hannah's signature flush throughout the season — cool pink liquid blush"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B08JKTGRGT?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Converse Chuck Taylor Black High Top</div><div class="product-brand">Hannah Wells — worn on screen</div><div class="product-quote">"Her exact campus sneaker — worn with her floral embroidered jeans"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B00418A05M?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Carhartt Men's Midweight Hoodie</div><div class="product-brand">Garrett, Logan & Dean — costume dept confirmed</div><div class="product-quote">"Used to style the Briar University hockey players throughout the season"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/dp/B002G9UD82?tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+          <div class="product-card"><div class="product-name">Official Off Campus Merch — Briar University</div><div class="product-brand">Official series apparel — sold on Amazon</div><div class="product-quote">"T-shirts, hoodies and more — Amazon is the official merch distributor"</div><div class="product-bottom"><div style="display:flex;gap:6px;align-items:center;"><span class="retailer-badge">Amazon</span><a class="shop-btn" href="https://www.amazon.com/s?rh=n%3A7141123011%2Cp_4%3AOff%2BCampus&ref=bl_sl_s_ap_web_7141123011&tag=getsnatched03-20" target="_blank">Shop ↗</a></div></div></div>
+        </div>
+      </div>
 
       <div class="character-group">
         <div class="character-label">Allie Hayes (Mika Abdalla)</div>
