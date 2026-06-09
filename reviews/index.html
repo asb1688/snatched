@@ -99,8 +99,8 @@
     .verdict-skip { background: rgba(239,68,68,0.15); color: var(--skip); }
     .card-summary { font-size: 13px; color: #bbb; line-height: 1.5; }
     .card-review-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .shop-link { font-size: 12px; font-weight: 600; color: var(--pink); text-decoration: none; margin-top: 4px; }
-    .shop-link:hover { text-decoration: underline; }
+    .shop-link { display:inline-block; margin-top:12px; color:#FF4D8D; font-size:13px; font-weight:600; text-decoration:none; }
+    .shop-link:hover { text-decoration:underline; }
     .status { text-align: center; color: var(--muted); padding: 48px 24px; font-size: 15px; }
     .status.error { color: var(--skip); }
     @media (max-width: 600px) {
@@ -163,7 +163,7 @@
       const summary = field(review, 'summary', 'oneLiner', 'one_liner', 'description') || '';
       const slug = field(review, 'slug', 'id') || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-      const amazonUrl = 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=getsnatched03-20';
+      const item = review;
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML =
@@ -175,7 +175,7 @@
           '<span class="verdict ' + verdictClass(verdict) + '">' + escapeHtml(verdict) + '</span>' +
           '<p class="card-summary">' + escapeHtml(summary) + '</p>' +
         '</a>' +
-        '<a class="shop-link" href="' + escapeHtml(amazonUrl) + '" target="_blank" rel="noopener noreferrer">Shop on Amazon ↗</a>';
+        '<a class="shop-link" href="https://www.amazon.com/s?k=' + encodeURIComponent(item.product_name || '') + '&tag=getsnatched03-20" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Shop on Amazon ↗</a>';
       return card;
     }
 
