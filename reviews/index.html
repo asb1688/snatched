@@ -98,6 +98,9 @@
     .verdict-maybe { background: rgba(234,179,8,0.15); color: var(--maybe); }
     .verdict-skip { background: rgba(239,68,68,0.15); color: var(--skip); }
     .card-summary { font-size: 13px; color: #bbb; line-height: 1.5; }
+    .card-review-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .shop-link { font-size: 12px; font-weight: 600; color: var(--pink); text-decoration: none; margin-top: 4px; }
+    .shop-link:hover { text-decoration: underline; }
     .status { text-align: center; color: var(--muted); padding: 48px 24px; font-size: 15px; }
     .status.error { color: var(--skip); }
     @media (max-width: 600px) {
@@ -160,16 +163,19 @@
       const summary = field(review, 'summary', 'oneLiner', 'one_liner', 'description') || '';
       const slug = field(review, 'slug', 'id') || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-      const card = document.createElement('a');
+      const amazonUrl = 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=getsnatched03-20';
+      const card = document.createElement('div');
       card.className = 'card';
-      card.href = '/reviews/product/?slug=' + encodeURIComponent(slug);
       card.innerHTML =
-        '<div class="card-top">' +
-          '<div class="card-name">' + escapeHtml(name) + '</div>' +
-          '<span class="retailer-badge">' + escapeHtml(retailer) + '</span>' +
-        '</div>' +
-        '<span class="verdict ' + verdictClass(verdict) + '">' + escapeHtml(verdict) + '</span>' +
-        '<p class="card-summary">' + escapeHtml(summary) + '</p>';
+        '<a class="card-review-link" href="/reviews/' + encodeURIComponent(slug) + '/">' +
+          '<div class="card-top">' +
+            '<div class="card-name">' + escapeHtml(name) + '</div>' +
+            '<span class="retailer-badge">' + escapeHtml(retailer) + '</span>' +
+          '</div>' +
+          '<span class="verdict ' + verdictClass(verdict) + '">' + escapeHtml(verdict) + '</span>' +
+          '<p class="card-summary">' + escapeHtml(summary) + '</p>' +
+        '</a>' +
+        '<a class="shop-link" href="' + escapeHtml(amazonUrl) + '" target="_blank" rel="noopener noreferrer">Shop on Amazon ↗</a>';
       return card;
     }
 
