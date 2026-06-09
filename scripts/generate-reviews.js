@@ -136,8 +136,19 @@ function renderComparable(comparable) {
   return html;
 }
 
+function displayProductName(name) {
+  if (!name) return name;
+  if (name.length <= 60) return name;
+  const pipeIndex = name.indexOf('|');
+  if (pipeIndex > 0 && pipeIndex <= 60) {
+    return name.slice(0, pipeIndex).trim();
+  }
+  return name.slice(0, 57).trim().replace(/[\s\-|]+$/, '') + '...';
+}
+
 function buildPage(review) {
   const productName = review.product_name || review.productName || 'Product';
+  const headingName = displayProductName(productName);
   const retailer = review.retailer || 'Retailer';
   const verdict = review.verdict || 'Maybe';
   const summary = review.summary || '';
@@ -171,6 +182,13 @@ function buildPage(review) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCMRLHPNF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZCMRLHPNF1');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -335,7 +353,7 @@ function buildPage(review) {
     <a href="/reviews/" class="back-link">← All reviews</a>
     <div class="header">
       <div class="header-top">
-        <h1 class="product-name">${escapeHtml(productName)}</h1>
+        <h1 class="product-name">${escapeHtml(headingName)}</h1>
         <span class="retailer-badge">${escapeHtml(retailer)}</span>
       </div>
       <span class="verdict ${verdictClass(verdict)}">${escapeHtml(verdict)}</span>
