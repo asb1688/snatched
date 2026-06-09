@@ -162,7 +162,7 @@
 
       const card = document.createElement('a');
       card.className = 'card';
-      card.href = '/reviews/' + encodeURIComponent(slug) + '/';
+      card.href = '/reviews/product/?slug=' + encodeURIComponent(slug);
       card.innerHTML =
         '<div class="card-top">' +
           '<div class="card-name">' + escapeHtml(name) + '</div>' +
