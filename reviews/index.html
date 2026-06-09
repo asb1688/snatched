@@ -156,12 +156,21 @@
         .replace(/"/g, '&quot;');
     }
 
+    function slugify(name) {
+      return name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 120)
+        .replace(/-+$/g, '');
+    }
+
     function renderCard(review) {
       const name = field(review, 'productName', 'product_name', 'name') || 'Product';
       const retailer = field(review, 'retailer', 'store', 'site') || 'Retailer';
       const verdict = field(review, 'verdict', 'recommendation') || 'Maybe';
       const summary = field(review, 'summary', 'oneLiner', 'one_liner', 'description') || '';
-      const slug = field(review, 'slug', 'id') || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const slug = field(review, 'slug', 'id') || slugify(name);
 
       const item = review;
       const card = document.createElement('div');
