@@ -189,22 +189,32 @@
       return card;
     }
 
-    const CATEGORY_ORDER = ['beauty', 'health', 'electronics', 'home', 'general'];
-    const CATEGORY_LABELS = {
-      beauty: 'Skincare & Beauty',
-      health: 'Health & Wellness',
-      electronics: 'Electronics & Tools',
-      home: 'Home & Kitchen',
-      general: 'Other',
+    const SUBCATEGORY_ORDER = ['skincare', 'makeup', 'haircare'];
+    const SUBCATEGORY_LABELS = {
+      skincare: 'Skincare',
+      makeup: 'Makeup',
+      haircare: 'Hair Care',
     };
 
-    function getCategoryKey(review) {
-      const cat = String(field(review, 'category') || '').toLowerCase();
-      return CATEGORY_ORDER.includes(cat) ? cat : 'general';
-    }
+    const HAIR_KEYWORDS = [
+      'dry shampoo', 'heat protectant', 'hair spray', 'hairspray',
+      'shampoo', 'conditioner', 'hair', 'scalp', 'curl', 'wave', 'mousse',
+    ];
+    const MAKEUP_KEYWORDS = [
+      'lip gloss', 'lip tint', 'setting spray', 'lip balm', 'lip mask',
+      'foundation', 'concealer', 'mascara', 'lipstick', 'blush', 'bronzer',
+      'highlighter', 'eyeshadow', 'eyeliner', 'primer', 'powder', 'contour',
+    ];
 
     function getProductName(review) {
       return field(review, 'productName', 'product_name', 'name') || '';
+    }
+
+    function getSubcategoryKey(review) {
+      const name = getProductName(review).toLowerCase();
+      if (HAIR_KEYWORDS.some((kw) => name.includes(kw))) return 'haircare';
+      if (MAKEUP_KEYWORDS.some((kw) => name.includes(kw))) return 'makeup';
+      return 'skincare';
     }
 
     async function loadReviews() {
@@ -224,7 +234,7 @@
 
         const grouped = {};
         reviews.forEach((review) => {
-          const key = getCategoryKey(review);
+          const key = getSubcategoryKey(review);
           if (!grouped[key]) grouped[key] = [];
           grouped[key].push(review);
         });
@@ -233,7 +243,7 @@
         grid.className = '';
 
         let firstSection = true;
-        CATEGORY_ORDER.forEach((key) => {
+        SUBCATEGORY_ORDER.forEach((key) => {
           const items = grouped[key];
           if (!items || !items.length) return;
 
@@ -242,7 +252,7 @@
           );
 
           const header = document.createElement('h2');
-          header.textContent = CATEGORY_LABELS[key];
+          header.textContent = SUBCATEGORY_LABELS[key];
           header.style.fontWeight = '700';
           header.style.fontSize = '20px';
           header.style.color = '#fff';
