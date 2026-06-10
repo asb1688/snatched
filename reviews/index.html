@@ -189,6 +189,24 @@
       return card;
     }
 
+    const CATEGORY_ORDER = ['beauty', 'health', 'electronics', 'home', 'general'];
+    const CATEGORY_LABELS = {
+      beauty: 'Skincare & Beauty',
+      health: 'Health & Wellness',
+      electronics: 'Electronics & Tools',
+      home: 'Home & Kitchen',
+      general: 'Other',
+    };
+
+    function getCategoryKey(review) {
+      const cat = String(field(review, 'category') || '').toLowerCase();
+      return CATEGORY_ORDER.includes(cat) ? cat : 'general';
+    }
+
+    function getProductName(review) {
+      return field(review, 'productName', 'product_name', 'name') || '';
+    }
+
     async function loadReviews() {
       const status = document.getElementById('status');
       const grid = document.getElementById('grid');
@@ -204,8 +222,42 @@
           return;
         }
 
+        const grouped = {};
+        reviews.forEach((review) => {
+          const key = getCategoryKey(review);
+          if (!grouped[key]) grouped[key] = [];
+          grouped[key].push(review);
+        });
+
         grid.innerHTML = '';
-        reviews.forEach(r => grid.appendChild(renderCard(r)));
+        grid.className = '';
+
+        let firstSection = true;
+        CATEGORY_ORDER.forEach((key) => {
+          const items = grouped[key];
+          if (!items || !items.length) return;
+
+          items.sort((a, b) =>
+            getProductName(a).localeCompare(getProductName(b), undefined, { sensitivity: 'base' })
+          );
+
+          const header = document.createElement('h2');
+          header.textContent = CATEGORY_LABELS[key];
+          header.style.fontWeight = '700';
+          header.style.fontSize = '20px';
+          header.style.color = '#fff';
+          header.style.marginBottom = '16px';
+          header.style.marginTop = firstSection ? '0' : '40px';
+
+          const cardGrid = document.createElement('div');
+          cardGrid.className = 'grid';
+          items.forEach((review) => cardGrid.appendChild(renderCard(review)));
+
+          grid.appendChild(header);
+          grid.appendChild(cardGrid);
+          firstSection = false;
+        });
+
         status.hidden = true;
         grid.hidden = false;
       } catch (err) {
