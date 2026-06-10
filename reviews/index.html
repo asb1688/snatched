@@ -173,12 +173,13 @@
       const slug = field(review, 'slug', 'id') || slugify(name);
 
       const item = review;
+      const displayName = name.length > 60 ? name.slice(0, 57) + '...' : name;
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML =
         '<a class="card-review-link" href="/reviews/' + encodeURIComponent(slug) + '/">' +
           '<div class="card-top">' +
-            '<div class="card-name">' + escapeHtml(name) + '</div>' +
+            '<div class="card-name">' + escapeHtml(displayName) + '</div>' +
             '<span class="retailer-badge">' + escapeHtml(retailer) + '</span>' +
           '</div>' +
           '<span class="verdict ' + verdictClass(verdict) + '">' + escapeHtml(verdict) + '</span>' +
