@@ -12,6 +12,7 @@
   <meta name='impact-site-verification' value='7d5523c5-e230-48cb-aef4-d95f77012c5f'>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Snatched — AI Beauty Advisor for Sephora & Ulta</title>
   <meta name="description" content="Snatched gives you an instant AI verdict on any beauty product — Buy, Maybe, or Skip — plus clean beauty check, key ingredients, smarter alternatives, and price drop alerts." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +37,14 @@
     .sn-nav-link:hover { color: #e91e8c; }
     .sn-nav-cta { background: #e91e8c; color: #fff; padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; }
     .sn-nav-cta:hover { opacity: 0.9; }
+    @media (max-width: 768px) {
+      .sn-nav { flex-wrap: nowrap; }
+      .sn-nav-links { flex-wrap: nowrap; white-space: nowrap; }
+      .sn-nav-link[href="/reviews/"],
+      .sn-nav-link[href="/links"] { display: none; }
+      .sn-nav-cta { font-size: 0; }
+      .sn-nav-cta::after { content: 'Get Link'; font-size: 14px; font-weight: 600; }
+    }
     @media (max-width: 480px) { .sn-nav { padding: 12px 20px; } .sn-nav-links { gap: 12px; } .sn-nav-link { font-size: 12px; } }
 
     /* HERO */
