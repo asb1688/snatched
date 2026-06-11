@@ -85,6 +85,16 @@
     .verdict-buy { background: rgba(34,197,94,0.15); color: var(--buy); }
     .verdict-maybe { background: rgba(234,179,8,0.15); color: var(--maybe); }
     .verdict-skip { background: rgba(239,68,68,0.15); color: var(--skip); }
+    .shop-amazon-wrap { margin-top: 16px; }
+    .shop-amazon-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--pink); color: #fff;
+      padding: 14px 28px; border-radius: 100px;
+      font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .shop-amazon-btn:hover { opacity: 0.9; }
+    .shop-amazon-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
     .summary {
       font-size: 16px;
       line-height: 1.7;
@@ -180,6 +190,10 @@
         <span class="retailer-badge">Amazon</span>
       </div>
       <span class="verdict verdict-buy">Buy</span>
+      <div class="shop-amazon-wrap">
+        <a href="https://www.amazon.com/s?k=Mighty%20Patch%E2%84%A2%20Invisible%2B%20Patch%20%E2%80%93%20The%20Barely-There%20Daytime%20Hydrocolloid%20Acne%20Pimple%20Patch%20for%20Covering%20Zits%20and%20Blemishes%2C%20Tapered%20Edges%20Designed%20to%20Blend%20Into%20Skin%20(72ct)&tag=getsnatched03-20" target="_blank" rel="noopener noreferrer" class="shop-amazon-btn">Shop on Amazon ↗</a>
+        <p class="shop-amazon-note">Prices may vary</p>
+      </div>
     </div>
     <p class="summary">Mighty Patch Invisible+ delivers consistent, dermatologist-trusted hydrocolloid acne-fighting results in an ultra-thin, daytime-wearable patch that outperforms most competitors across all skin types.</p>
 

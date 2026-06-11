@@ -85,6 +85,16 @@
     .verdict-buy { background: rgba(34,197,94,0.15); color: var(--buy); }
     .verdict-maybe { background: rgba(234,179,8,0.15); color: var(--maybe); }
     .verdict-skip { background: rgba(239,68,68,0.15); color: var(--skip); }
+    .shop-amazon-wrap { margin-top: 16px; }
+    .shop-amazon-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--pink); color: #fff;
+      padding: 14px 28px; border-radius: 100px;
+      font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .shop-amazon-btn:hover { opacity: 0.9; }
+    .shop-amazon-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
     .summary {
       font-size: 16px;
       line-height: 1.7;
@@ -180,6 +190,10 @@
         <span class="retailer-badge">Amazon</span>
       </div>
       <span class="verdict verdict-buy">Buy</span>
+      <div class="shop-amazon-wrap">
+        <a href="https://www.amazon.com/s?k=ILIA%20-%20Limitless%20Lash%20Mascara%20%7C%20Lengthen%2C%20Lift%2C%20Separate%20%7C%2012-HR%20Wear%20%7C%20Flake%20%2B%20Smudge-Resistant%20%7C%20Conditioning%20Ingredients%20%7C%20Safe%20for%20Sensitive%20Eyes%2C%20Clean%2C%20Cruelty-Free%20(After%20Midnight%20%7C%20Soft%20black)&tag=getsnatched03-20" target="_blank" rel="noopener noreferrer" class="shop-amazon-btn">Shop on Amazon ↗</a>
+        <p class="shop-amazon-note">Prices may vary</p>
+      </div>
     </div>
     <p class="summary">A clean, non-toxic mascara that delivers natural-looking length and separation without clumping, making it a standout choice for sensitive eyes despite minor smudging concerns.</p>
 
