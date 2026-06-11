@@ -37,13 +37,13 @@
     .sn-nav-link:hover { color: #e91e8c; }
     .sn-nav-cta { background: #e91e8c; color: #fff; padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; }
     .sn-nav-cta:hover { opacity: 0.9; }
+    .sn-nav-cta-mobile { display: none; }
     @media (max-width: 768px) {
       .sn-nav { flex-wrap: nowrap; }
       .sn-nav-links { flex-wrap: nowrap; white-space: nowrap; }
-      .sn-nav-link[href="/reviews/"],
       .sn-nav-link[href="/links"] { display: none; }
-      .sn-nav-cta { font-size: 0; }
-      .sn-nav-cta::after { content: 'Get Link'; font-size: 14px; font-weight: 600; }
+      .sn-nav-cta-full { display: none; }
+      .sn-nav-cta-mobile { display: inline; }
     }
     @media (max-width: 480px) { .sn-nav { padding: 12px 20px; } .sn-nav-links { gap: 12px; } .sn-nav-link { font-size: 12px; } }
 
@@ -141,7 +141,7 @@
       <a href="/picks" class="sn-nav-link">Picks</a>
       <a href="/reviews/" class="sn-nav-link">Reviews</a>
       <a href="/links" class="sn-nav-link">Links</a>
-      <a href="/mobile/" class="sn-nav-cta">Get an Email Link</a>
+      <a href="/mobile/" class="sn-nav-cta"><span class="sn-nav-cta-full">Get an Email Link</span><span class="sn-nav-cta-mobile">Get Link</span></a>
     </div>
   </nav>
 
