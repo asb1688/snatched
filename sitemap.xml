@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://get-snatched.com/reviews/clinique-almost-lipstick-tinted-lip-balm-in-3-iconic-shades-black-honey-pink-and-nude-honey-sheer-lightweight/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://get-snatched.com/reviews/rare-beauty-soft-pinch-luminous-powder-blush-hope-nude-mauve-radiant-finish-0-098-oz-2-8-g-palette/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -497,11 +502,6 @@
   </url>
   <url>
     <loc>https://get-snatched.com/reviews/k18-leave-in-molecular-repair-hair-mask-patented-lasting-repair-for-dry-frizzy-damaged-hair-reverse-damage-in-4-minutes-/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://get-snatched.com/reviews/clinique-almost-lipstick-tinted-lip-balm-in-3-iconic-shades-black-honey-pink-and-nude-honey-sheer-lightweight/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
