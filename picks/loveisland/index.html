@@ -403,5 +403,18 @@
     }
   </script>
 
+<script>
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (link && link.href && link.href.includes('amazon.com')) {
+    gtag('event', 'amazon_click', {
+      'link_url': link.href,
+      'link_text': link.innerText,
+      'page_location': window.location.href
+    });
+  }
+});
+</script>
+
 </body>
 </html>
