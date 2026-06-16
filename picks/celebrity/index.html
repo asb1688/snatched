@@ -29,11 +29,13 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --pink: #FF4D8D;
-      --pink-dim: rgba(255,77,141,0.15);
-      --bg: #0d0d0d;
-      --surface: #1a1a1a;
-      --surface2: #222;
+      --pink: #C792EA;
+      --pink-dim: rgba(199,146,234,0.15);
+      --accent-secondary: #82AAFF;
+      --shop: #F07178;
+      --bg: #1E1E2E;
+      --surface: #252540;
+      --surface2: #2D2D4A;
       --text: #f0f0f0;
       --muted: #666;
       --border: rgba(255,255,255,0.08);
@@ -49,7 +51,7 @@
     nav {
       position: sticky;
       top: 0;
-      background: rgba(13,13,13,0.95);
+      background: rgba(30,30,46,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
@@ -153,7 +155,7 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .product-card:hover { border-color: var(--pink); background: var(--surface2); }
-    .product-name { font-size: 16px; font-weight: 700; line-height: 1.35; color: #fff; }
+    .product-name { font-size: 16px; font-weight: 700; line-height: 1.35; color: var(--accent-secondary); }
     .product-brand { font-size: 13px; color: #aaa; margin-top: 2px; }
     .product-quote { font-size: 13px; color: #bbb; font-style: italic; line-height: 1.5; }
     .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
@@ -161,11 +163,11 @@
     .retailer-badge {
       font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
       text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
-      background: rgba(255,255,255,0.08); color: #aaa;
+      background: var(--pink-dim); color: var(--pink);
     }
     .shop-btn {
       display: inline-flex; align-items: center; gap: 4px;
-      background: var(--pink); color: #fff; text-decoration: none;
+      background: var(--shop); color: #fff; text-decoration: none;
       font-size: 11px; font-weight: 600; padding: 5px 10px;
       border-radius: 6px; transition: opacity 0.2s;
     }
@@ -195,7 +197,7 @@
       transition: all 0.2s;
     }
     .char-btn:hover, .char-btn.active {
-      background: rgba(255,77,141,0.15);
+      background: var(--pink-dim);
       color: var(--pink);
       border-color: var(--pink);
     }
