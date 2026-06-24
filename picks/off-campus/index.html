@@ -539,7 +539,7 @@ const utmMedium = urlParams.get('utm_medium') || 'none';
 document.addEventListener('click', function(e) {
   var link = e.target.closest('a');
   if (link && link.href && link.href.includes('amazon.com')) {
-    gtag('event', 'amazon_click', {
+    gtag('event', 'affordable_click', {
       'source': utmSource,
       'medium': utmMedium,
       'link_url': link.href
