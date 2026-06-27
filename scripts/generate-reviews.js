@@ -160,7 +160,6 @@ function buildPage(review) {
 
   const title = `${productName} — AI Says ${verdict} | Snatched`;
   const description = summary || `AI-verified ${verdict} verdict for ${productName}.`;
-  const amazonUrl = `https://www.amazon.com/s?k=${encodeURIComponent(productName)}&tag=getsnatched03-20`;
 
   const statsSection = statsHtml
     ? `<div class="section-label">Review Stats</div>
@@ -263,16 +262,6 @@ function buildPage(review) {
     .verdict-buy { background: rgba(34,197,94,0.15); color: var(--buy); }
     .verdict-maybe { background: rgba(234,179,8,0.15); color: var(--maybe); }
     .verdict-skip { background: rgba(239,68,68,0.15); color: var(--skip); }
-    .shop-amazon-wrap { margin-top: 16px; }
-    .shop-amazon-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--pink); color: #fff;
-      padding: 14px 28px; border-radius: 100px;
-      font-size: 16px; font-weight: 600;
-      text-decoration: none; transition: opacity 0.2s;
-    }
-    .shop-amazon-btn:hover { opacity: 0.9; }
-    .shop-amazon-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
     .summary {
       font-size: 16px;
       line-height: 1.7;
@@ -368,10 +357,6 @@ function buildPage(review) {
         <span class="retailer-badge">${escapeHtml(retailer)}</span>
       </div>
       <span class="verdict ${verdictClass(verdict)}">${escapeHtml(verdict)}</span>
-      <div class="shop-amazon-wrap">
-        <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="shop-amazon-btn">Shop on Amazon ↗</a>
-        <p class="shop-amazon-note">Prices may vary</p>
-      </div>
     </div>
     ${summary ? `<p class="summary">${escapeHtml(summary)}</p>` : ''}
 
